@@ -1,0 +1,30 @@
+# 模板：先由管理员提供 secrets 文件；本次没有创建任何生产密钥。
+services:
+  deepseek-search-mcp:
+    build: .
+    image: deepseek-search-mcp:0.1.0
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:18082:8080"
+    environment:
+      DEEPSEEK_API_KEY_FILE: /run/secrets/deepseek_api_key
+      MCP_TOKENS_FILE: /run/secrets/mcp_tokens
+      MCP_PATH: /deepseek
+      MCP_ALLOWED_HOSTS: '["mcp.mshushu.cn", "127.0.0.1:18082", "localhost:18082"]'
+      MCP_ALLOWED_ORIGINS: '[]'
+    secrets:
+      - deepseek_api_key
+      - mcp_tokens
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    pids_limit: 64
+    mem_limit: 256m
+    cpus: 1
+    tmpfs:
+      - /tmp:size=8m,noexec,nosuid
+secrets:
+  deepseek_api_key:
+    file: ./secrets/deepseek_api_key
+  mcp_tokens:
+    file: ./secrets/mcp_tokens.json

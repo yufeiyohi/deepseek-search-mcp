@@ -1,0 +1,13 @@
+secrets/
+.env
+.env.*
+!.env.example
+backups/
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.log
+*.tar
+*.tar.gz
+.pytest_cache/

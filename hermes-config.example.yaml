@@ -1,0 +1,10 @@
+# 示例，不会自动写入任何 profile。每个 profile 必须替换为自己的 token。
+mcp_servers:
+  deepseek_search:
+    url: https://mcp.mshushu.cn/deepseek
+    headers:
+      Authorization: "Bearer REPLACE_THIS_PROFILE_TOKEN"
+    timeout: 45
+    connect_timeout: 15
+    sampling:
+      enabled: false
